@@ -1,0 +1,49 @@
+{% extends 'employee-layout.html' %}
+{% load static %}
+
+{% block search %}
+<form class="d-flex" method="GET" action="{% url 'employee-list' %}">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+  <table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Vardas</th>
+        <th scope="col">Pavardė</th>
+        <th scope="col">Profesija</th>
+        <th scope="col">Kvalifikacija</th>
+        <th scope="col">Patirtis</th>
+        <th scope="col">Koeficientas</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in object_list %}
+        <tr>
+          <th scope="row">{{ employee.id }}</th>
+          <td>{{ employee.first_name }}</td>
+          <td>{{ employee.last_name }}</td>
+          <td>{{ employee.koefficient.profession }}</td>
+          <td>{{ employee.koefficient.qualification }}</td>
+          <td>{{ employee.koefficient.experience }}</td>
+          <td>{{ employee.koefficient.value }}</td>
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <a href="{% url 'employee-create' %}">
+                <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" />
+              </a>
+              <a href="{% url 'employee-delete' employee.id %}">
+                <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

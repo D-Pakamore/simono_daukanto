@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <style>
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+  </style>
+
+  <h2 style="text-align: center;">Redaguoti Koeficientą</h2>
+  <form style="max-width: 400px; margin: 100px auto 0 auto;" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="width: 100%; text-align: center;">
+      <button type="submit" class="btn btn-primary">Išsaugoti</button>
+      <a href="{% url 'koefficient-list' %}" class="btn btn-secondary">Atšaukti</a>
+    </div>
+  </form>
+{% endblock %}

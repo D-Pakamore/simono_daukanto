@@ -1,0 +1,45 @@
+{% extends 'koefficient-layout.html' %}
+{% load static %}
+
+{% block search %}
+  <form class="d-flex" method="GET" action="{% url 'koefficient-list' %}">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+{% endblock %}
+
+{% block content %}
+  <table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Profesija</th>
+        <th scope="col">Kvalifikacija</th>
+        <th scope="col">Patirtis</th>
+        <th scope="col">Koeficientas</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for koefficient in object_list %}
+        <tr>
+          <th scope="row">{{ koefficient.id }}</th>
+          <td>{{ koefficient.profession }}</td>
+          <td>{{ koefficient.qualification }}</td>
+          <td>{{ koefficient.experience }}</td>
+          <td>{{ koefficient.value }}</td>
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <a href="{% url 'koefficient-create' %}">
+                <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" />
+              </a>
+              <a href="{% url 'koefficient-edit' koefficient.id %}">
+                <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
