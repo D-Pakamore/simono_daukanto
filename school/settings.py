@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'bootstrap5',
     'homepage',
     'koefficient_calculator',
+    'workload_calculator',
+    'contactless_percent_calculator',
     'employees',
 ]
 

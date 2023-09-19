@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Employee
+from .models import Teacher
 
-@admin.register(Employee)
-class EmployeeAdmin(admin.ModelAdmin):
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name']
     exclude = []

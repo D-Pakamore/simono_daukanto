@@ -15,4 +15,4 @@ class HomepageView(TemplateView):
             }
         ]
 
-        return context
+        return context   

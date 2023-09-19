@@ -2,7 +2,7 @@ const professionSelect = document.getElementById('id_profession');
 const formEl = document.querySelector('form')
 const formButtonsWrapper = formEl.querySelector('div')
 
-const API_ENDPOINT = 'http://127.0.0.1:8000'
+const API_ENDPOINT = "http://127.0.0.1:8000"
 
 async function fetchData(endpoint) {
     const url = API_ENDPOINT + endpoint;
@@ -10,10 +10,8 @@ async function fetchData(endpoint) {
 
     const response = await fetch(url);
 
-    console.log(response)
-
     if (!response.ok) {
-        
+
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
@@ -36,10 +34,10 @@ const fetchQualification = async (professionId) => {
 
 const createExpereinceInput = (data) => {
     const existingQualificationChoice = document.getElementById('experience-select-wrapper')
-    if (existingQualificationChoice) {existingQualificationChoice.remove()}
+    if (existingQualificationChoice) { existingQualificationChoice.remove() }
 
     const experienceType = data[0].experience.name + ":"
-    const experienceChoices = data.map(item => {return {id: item.experience.id, choice: item.experience.value}})
+    const experienceChoices = data.map(item => { return { id: item.experience.id, choice: item.experience.value } })
 
     const pEl = document.createElement('p')
     const labelEl = document.createElement('label')
@@ -67,10 +65,10 @@ const createExpereinceInput = (data) => {
 
 const createQualificationInput = (data) => {
     const existingQualificationChoice = document.getElementById('qualification-select-wrapper')
-    if (existingQualificationChoice) {existingQualificationChoice.remove()}
+    if (existingQualificationChoice) { existingQualificationChoice.remove() }
 
     const qualificationType = data[0].qualification.name + ":"
-    const qualificationChoices = data.map(item => {return {id: item.qualification.id, choice: item.qualification.value}})
+    const qualificationChoices = data.map(item => { return { id: item.qualification.id, choice: item.qualification.value } })
 
     const pEl = document.createElement('p')
     const labelEl = document.createElement('label')
