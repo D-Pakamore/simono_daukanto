@@ -3,5 +3,5 @@ from .models import Teacher
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name']
+    list_display = ['id', 'first_name', 'last_name', 'koefficient']
     exclude = []

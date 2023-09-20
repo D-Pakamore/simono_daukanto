@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'koefficient_calculator',
     'workload_calculator',
     'contactless_percent_calculator',
+    'activities',
     'employees',
 ]
 
