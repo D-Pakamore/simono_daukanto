@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    
+    div > label {
+      margin-bottom: 0 !important;
+    }
+  </style>
+  <h2 style="text-align: center; margin-top: 25px;">Darbo krūvio skaičiuoklė</h2>
+
+  <div class="teacher-information" style="position: absolute;">
+    <ol class="list-group list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{ teacher.first_name }} {{ teacher.last_name }}</div>
+          {{ teacher.koefficient.profession }}
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  {% comment %} <div style="max-width: 250px; position: absolute; right: 100px; border: 4px solid #212529; padding: 25px; border-radius: 20px; text-align: center;" id="contact-classes-form-wrapper">
+    <form style="text-align: left;">
+      <div class="mb-3">
+        <label for="class-type" class="form-label">Klasė</label>
+        <select id="class-type" class="form-select">
+          <option value="1">Kontaktinės 1-4 kl.</option>
+          <option value="2">Kontaktinės 5-8 kl.</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="student-count" class="form-label">Mokinių skaičius</label>
+        <select id="student-count" class="form-select">
+          <option value="1">12-20</option>
+          <option value="2">21 ir daugiau</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="class-count" class="form-label">Klasių kiekis</label>
+        <input type="number" class="form-control" id="class-count" />
+      </div>
+    </form>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div> {% endcomment %}
+
+  <form style="max-width: 400px; margin: 25px auto 0 auto;" class="form-group" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+      <label for="class-type" class="form-label">Klasė</label>
+      <select id="class-grade" class="form-select">
+        <option value selected>---------</option>
+        <option value="1-4">Kontaktinės 1-4 kl.</option>
+        <option value="5-8">Kontaktinės 5-8 kl.</option>
+      </select>
+    </p>
+    <p>
+      <label for="student-count" class="form-label">Mokinių skaičius</label>
+      <select id="student-count" class="form-select">
+        <option value selected>---------</option>
+        <option value="12-20">12-20</option>
+        <option value="21">21 ir daugiau</option>
+      </select>
+    </p>
+    <p>
+      <label for="class-count" class="form-label">Klasių kiekis</label>
+      <input type="number" class="form-control" id="class-count" />
+    </p>
+    <div style="width: 100%; text-align: center;">
+      <button class="btn btn-primary" type="submit">Save</button>
+      {% comment %} <a class="btn btn-secondary" href="{% url 'teacher-list' %}">Cancel</a> {% endcomment %}
+    </div>
+  </form>
+
+  {% comment %} <script src="{% static 'workload_calculator/script.js' %}"></script> {% endcomment %}
+{% endblock %}

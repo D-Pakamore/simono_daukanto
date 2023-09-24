@@ -3,7 +3,6 @@ from django.db import models
 class ContactlessHourPercent(models.Model):
     TEACHING_SUBJECTS = (
         ('Pradinis ugdymas', 'Pradinis ugdymas'),
-        ('Pagrindinis ir vidurinis ugdymas', 'Pagrindinis ir vidurinis ugdymas'),
         ('Dorinis ugdymas', 'Dorinis ugdymas'),
         ('Lietuvių kalba, gimtoji kalba', 'Lietuvių kalba, gimtoji kalba'),
         ('Užsienio kalba', 'Užsienio kalba'),
@@ -29,4 +28,4 @@ class ContactlessHourPercent(models.Model):
     percent = models.FloatField()
 
     def __str__(self) -> str:
-        return self.percent
+        return str(self.percent)

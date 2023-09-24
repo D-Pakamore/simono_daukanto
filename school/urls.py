@@ -8,4 +8,5 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
     path('koefficients/', include('koefficient_calculator.urls')),
     path('api/', include('koefficient_calculator.urls')),
+    path('workload/', include('workload_calculator.urls')),
 ]

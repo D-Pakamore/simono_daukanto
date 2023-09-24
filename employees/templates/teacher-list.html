@@ -34,11 +34,14 @@
           <td>{{ teacher.koefficient.value }}</td>
           <td>
             <div style="display: flex; gap: 10px;">
-              <a href="{% url 'teacher-create' %}">
+              <a href="{% url 'teacher-create' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Pridėti mokytoja">
                 <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" />
               </a>
-              <a href="{% url 'teacher-delete' teacher.id %}">
+              <a href="{% url 'teacher-delete' teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Trinti">
                 <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+              </a>
+              <a href="{% url 'workload-create' teacher_id=teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="pridėti darbo krūvį">
+                <img style="width: 25px;" src="{% static 'images/document-add.svg' %}" alt="workload" />
               </a>
             </div>
           </td>

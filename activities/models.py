@@ -16,4 +16,4 @@ class YearlyHours(models.Model):
     hours = models.IntegerField()
 
     def __str__(self) -> str:
-        return self.hours
+        return str(self.hours)
