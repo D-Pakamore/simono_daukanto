@@ -35,10 +35,13 @@ class TeacherCreateForm(ModelForm):
     
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'work_experience_years', 'profession', 'qualification']
         labels = {
             'first_name': 'Vardas',
             'last_name': 'Pavardė',
+            'work_experience_years': 'Darbo patirtos metais',
+            'profession': 'Profesija',
+            'qualification': 'Kvalifikacija'
         }      
         
     
@@ -46,13 +49,30 @@ class TeacherCreateView(CreateView):
     model = Teacher
     template_name = 'teacher-create.html'
     form_class = TeacherCreateForm
-    success_url = '/teachers/'
+    success_url = '/employees/'
 
     def form_valid(self, form):
         # Access the dynamically added field from self.request.POST
         profession_id = self.request.POST.get('profession')
         qualification_id = self.request.POST.get('qualification')
-        experience_id = self.request.POST.get('experience')
+        experience_years = int(self.request.POST.get('work_experience_years'))
+
+        if experience_years < 2:
+            experience_value = "iki 2"
+        elif experience_years >= 2 and experience_years < 5:
+            experience_value = "nuo 2 iki 5"
+        elif experience_years >= 5 and experience_years < 10:
+            experience_value = "nuo 5 iki 10"
+        elif experience_years >= 10 and experience_years < 15:
+            experience_value = "nuo 10 iki 15"
+        elif experience_years >= 15 and experience_years < 20:
+            experience_value = "nuo 15 iki 20"
+        elif experience_years >= 20 and experience_years < 25:
+            experience_value = "nuo 20 iki 25"
+        elif experience_years > 25:
+            experience_value = "daugiau kaip 25"
+
+        experience_id = Experience.objects.get(value=experience_value).id
 
         koefficient_instance = Koefficient.objects.get(
             profession=profession_id,
@@ -68,4 +88,4 @@ class TeacherCreateView(CreateView):
 class TeacherDeleteView(DeleteView):
     model = Teacher
     template_name = 'teacher_confirm_delete.html'
-    success_url = '/teachers/'
+    success_url = '/employees/'
