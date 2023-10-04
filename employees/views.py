@@ -35,13 +35,10 @@ class TeacherCreateForm(ModelForm):
     
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name', 'work_experience_years', 'profession', 'qualification']
+        fields = ['first_name', 'last_name']
         labels = {
             'first_name': 'Vardas',
             'last_name': 'Pavardė',
-            'work_experience_years': 'Darbo patirtos metais',
-            'profession': 'Profesija',
-            'qualification': 'Kvalifikacija'
         }      
         
     

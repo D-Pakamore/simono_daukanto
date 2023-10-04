@@ -3,5 +3,5 @@ from .models import Workload
 
 @admin.register(Workload)
 class WorkloadAdmin(admin.ModelAdmin):
-    list_display = ['contactless_hour_percent', 'yearly_contact_hours', 'contactless_hours','total_hours','etato_dalis']
+    list_display = ['contactless_hour_percent', 'contact_hours', 'contactless_hours','total_hours','etat_fraction']
     exclude = []
