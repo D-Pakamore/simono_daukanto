@@ -1,6 +1,6 @@
-// const professionSelect = document.getElementById('id_profession');
-// const formEl = document.querySelector('form')
-// const formButtonsWrapper = formEl.querySelector('div')
+const professionSelect = document.getElementById('id_profession');
+const formEl = document.querySelector('form')
+const formButtonsWrapper = formEl.querySelector('div')
 
 // const API_ENDPOINT = "http://127.0.0.1:8000"
 

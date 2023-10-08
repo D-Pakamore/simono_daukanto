@@ -13,7 +13,6 @@ class Workload(models.Model):
 
 class ActivityToWorkload(models.Model):
     workload = models.ForeignKey(Workload, null=True, on_delete=models.CASCADE)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     yearly_hours = models.ForeignKey(YearlyHours, on_delete=models.CASCADE)
     
 
@@ -26,7 +25,7 @@ class ContactClasses(models.Model):
         ('12-20', '12-20 mokinių klasėje'),
         ('21', '21 ir daugiau mokinių klasėje'),
     )
-    wrokload = models.ForeignKey(Workload, null=True, on_delete=models.CASCADE)
+    workload = models.ForeignKey(Workload, default=None, null=True, on_delete=models.CASCADE)
     grade_range = models.CharField(max_length=100, choices=CLASS_GRADES)
     student_count_range = models.CharField(max_length=100, choices=SUTEDENT_COUNTS)
     classes_count = models.IntegerField()

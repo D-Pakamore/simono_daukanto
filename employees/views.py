@@ -27,7 +27,9 @@ class TeacherListView(ListView):
     
 
 class TeacherCreateForm(ModelForm):
-    profession = ModelChoiceField(queryset=Profession.objects.all())
+    profession = ModelChoiceField(queryset=Profession.objects.all(), label="Profesija")
+    experience = ModelChoiceField(queryset=Experience.objects.all(), label="Patirtis metais")
+    qualification = ModelChoiceField(queryset=Qualification.objects.all(), label="Kvalifikacija")
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')  
@@ -52,24 +54,7 @@ class TeacherCreateView(CreateView):
         # Access the dynamically added field from self.request.POST
         profession_id = self.request.POST.get('profession')
         qualification_id = self.request.POST.get('qualification')
-        experience_years = int(self.request.POST.get('work_experience_years'))
-
-        if experience_years < 2:
-            experience_value = "iki 2"
-        elif experience_years >= 2 and experience_years < 5:
-            experience_value = "nuo 2 iki 5"
-        elif experience_years >= 5 and experience_years < 10:
-            experience_value = "nuo 5 iki 10"
-        elif experience_years >= 10 and experience_years < 15:
-            experience_value = "nuo 10 iki 15"
-        elif experience_years >= 15 and experience_years < 20:
-            experience_value = "nuo 15 iki 20"
-        elif experience_years >= 20 and experience_years < 25:
-            experience_value = "nuo 20 iki 25"
-        elif experience_years > 25:
-            experience_value = "daugiau kaip 25"
-
-        experience_id = Experience.objects.get(value=experience_value).id
+        experience_id = self.request.POST.get('experience')
 
         koefficient_instance = Koefficient.objects.get(
             profession=profession_id,
