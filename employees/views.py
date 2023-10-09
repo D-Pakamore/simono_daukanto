@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from django.forms import ModelForm, ModelChoiceField
 from .models import Teacher
+from workload_calculator.models import Workload, ActivityToWorkload, ContactClasses
+from activities.models import Activity, YearlyHours
 from koefficient_calculator.models import Profession, Qualification, Experience, Koefficient
 from django.db.models import Q
 
@@ -71,3 +73,39 @@ class TeacherDeleteView(DeleteView):
     model = Teacher
     template_name = 'teacher_confirm_delete.html'
     success_url = '/employees/'
+
+class TeacherDetailView(DetailView):
+    model = Teacher
+    template_name = 'teacher-detail.html'
+    context_object_name = 'teacher'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #Workload to context
+        teacher_id = self.kwargs.get('pk')
+        teacher_instance = Teacher.objects.get(id=teacher_id)
+        workloads = Workload.objects.filter(teacher=teacher_instance)
+
+        for workload in workloads:
+            activities_to_workload = ActivityToWorkload.objects.filter(workload=workload)
+
+            yearly_hours = [YearlyHours.objects.get(id=i.yearly_hours.id) for i in activities_to_workload]
+
+            activity_ids = list(dict.fromkeys([i.activity.id for i in yearly_hours]))
+            activities = [Activity.objects.get(id=i) for i in activity_ids]
+
+            for activity in activities:
+                for yearly_hour in yearly_hours:
+                    if yearly_hour.activity.id == activity.id:
+                        activity.yearly_hours = yearly_hour.hours
+
+
+            workload.contact_classes = ContactClasses.objects.filter(workload=workload.id)
+            workload.activities = activities
+                
+
+
+        context['workloads'] = workloads
+
+        return context  

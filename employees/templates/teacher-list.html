@@ -9,44 +9,52 @@
 {% endblock %}
 
 {% block content %}
-  <table class="table table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Vardas</th>
-        <th scope="col">Pavardė</th>
-        <th scope="col">Profesija</th>
-        <th scope="col">Kvalifikacija</th>
-        <th scope="col">Patirtis</th>
-        <th scope="col">Koeficientas</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for teacher in object_list %}
-        <tr>
-          <th scope="row">{{ teacher.id }}</th>
-          <td>{{ teacher.first_name }}</td>
-          <td>{{ teacher.last_name }}</td>
-          <td>{{ teacher.koefficient.profession }}</td>
-          <td>{{ teacher.koefficient.qualification }}</td>
-          <td>{{ teacher.koefficient.experience }}</td>
-          <td>{{ teacher.koefficient.value }}</td>
-          <td>
-            <div style="display: flex; gap: 10px;">
-              <a href="{% url 'teacher-create' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Pridėti mokytoja">
-                <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" />
-              </a>
-              <a href="{% url 'teacher-delete' teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Trinti">
-                <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
-              </a>
-              <a href="{% url 'workload-create' teacher_id=teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="pridėti darbo krūvį">
-                <img style="width: 25px;" src="{% static 'images/document-add.svg' %}" alt="workload" />
-              </a>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vardas</th>
+      <th scope="col">Pavardė</th>
+      <th scope="col">Profesija</th>
+      <th scope="col">Kvalifikacija</th>
+      <th scope="col">Patirtis</th>
+      <th scope="col">Koeficientas</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for teacher in object_list %}
+    <tr>
+      <th scope="row">{{ teacher.id }}</th>
+      <td>
+        <a href="{% url 'teacher-detail' teacher.id %}">
+          {{ teacher.first_name }}
+        </a>
+      </td>
+      <td>{{ teacher.last_name }}</td>
+      <td>{{ teacher.koefficient.profession }}</td>
+      <td>{{ teacher.koefficient.qualification }}</td>
+      <td>{{ teacher.koefficient.experience }}</td>
+      <td>{{ teacher.koefficient.value }}</td>
+      <td>
+        <div style="display: flex; gap: 10px;">
+          <a href="{% url 'teacher-create' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Pridėti mokytoja">
+            <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}"
+              alt="create" />
+          </a>
+          <a href="{% url 'teacher-delete' teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Trinti">
+            <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+          </a>
+          <a href="{% url 'workload-create' teacher_id=teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="pridėti darbo krūvį">
+            <img style="width: 25px;" src="{% static 'images/document-add.svg' %}" alt="workload" />
+          </a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
