@@ -134,7 +134,7 @@ class WorkloadCreateView(CreateView):
                 contact_hours=contact_hours,
                 contactless_hours=contactless_hours,
                 total_hours=total_hours,
-                etat_fraction=etat_fraction
+                etat_fraction=round(etat_fraction, 2)
             )
 
             new_workload_instance.save()
