@@ -15,10 +15,10 @@
       <th scope="col">#</th>
       <th scope="col">Vardas</th>
       <th scope="col">Pavardė</th>
-      <th scope="col">Profesija</th>
-      <th scope="col">Kvalifikacija</th>
-      <th scope="col">Patirtis</th>
-      <th scope="col">Koeficientas</th>
+      <th scope="col">Gimimo metai</th>
+      <th scope="col">Telefonas</th>
+      <th scope="col">Paštas</th>
+      <th scope="col">Adresas</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -31,11 +31,14 @@
           {{ teacher.first_name }}
         </a>
       </td>
+
+
+
       <td>{{ teacher.last_name }}</td>
-      <td>{{ teacher.koefficient.profession }}</td>
-      <td>{{ teacher.koefficient.qualification }}</td>
-      <td>{{ teacher.koefficient.experience }}</td>
-      <td>{{ teacher.koefficient.value }}</td>
+      <td>{{ teacher.birth_date }}</td>
+      <td>{{ teacher.phone_number }}</td>
+      <td>{{ teacher.email }}</td>
+      <td>{{ teacher.home_address }}</td>
       <td>
         <div style="display: flex; gap: 10px;">
           <a href="{% url 'teacher-create' %}" data-bs-toggle="tooltip" data-bs-placement="top"
