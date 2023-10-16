@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+  </style>
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+
+  <form style="max-width: 400px; margin: 25px auto 0 auto;" class="form-group" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="width: 100%; text-align: center;">
+      <button class="btn btn-primary" type="submit">Prisijungti</button>
+      <a class="btn btn-secondary" href="{% url 'teacher-list' %}">Cancel</a>
+    </div>
+  </form>
+
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p>
+    <a href="{% url 'password_reset' %}">Lost password?</a>
+  </p>
+  <script src="{% static 'authentication/script.js' %}"></script>
+{% endblock %}

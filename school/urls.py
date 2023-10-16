@@ -9,4 +9,5 @@ urlpatterns = [
     path('koefficients/', include('koefficient_calculator.urls')),
     path('api/', include('koefficient_calculator.urls')),
     path('workload/', include('workload_calculator.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

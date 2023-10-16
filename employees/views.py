@@ -39,10 +39,14 @@ class TeacherCreateForm(ModelForm):
     
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name','birth_date', 'phone_number', 'email', 'home_address']
         labels = {
             'first_name': 'Vardas',
             'last_name': 'Pavardė',
+            'birth_date': 'Gimimo data',
+            'phone_number': 'Telefonas', 
+            'email': 'Paštas',
+            'home_address': 'Asresas',
         }      
         
     
