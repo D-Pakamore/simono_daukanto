@@ -7,7 +7,9 @@ class HomepageView(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
+        print(user.username)
 
         # Add custom data to the context
         context['nav_endpoints'] = [
@@ -17,4 +19,5 @@ class HomepageView(LoginRequiredMixin, TemplateView):
             }
         ]
 
+        context['user'] = user
         return context   

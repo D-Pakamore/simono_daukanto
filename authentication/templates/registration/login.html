@@ -15,19 +15,24 @@
       margin: 8px 0;
       box-sizing: border-box;
     }
+    .message-wrapper {
+      width: fit-content;
+      margin: 15px auto 0 auto;
+    }
   </style>
-
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
+  <div class="message-wrapper">
+    {% if form.errors %}
+      <p>Prisijungimo duomenys nesutampa, prašome mėginti dar kartą.</p>
     {% endif %}
-  {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Jūsų paskyra neturi teisės patekti į šį puslapį</p>
+      {% else %}
+        <p>Prisijunkite</p>
+      {% endif %}
+    {% endif %}
+  </div>
 
   <form style="max-width: 400px; margin: 25px auto 0 auto;" class="form-group" method="post" action="{% url 'login' %}">
     {% csrf_token %}
@@ -39,8 +44,10 @@
   </form>
 
   {# Assumes you setup the password_reset view in your URLconf #}
-  <p>
-    <a href="{% url 'password_reset' %}">Lost password?</a>
-  </p>
+  <div class="message-wrapper">
+    <p>
+      <a href="{% url 'password_reset' %}">Pamiršai slaptažodį?</a>
+    </p>
+  </div>
   <script src="{% static 'authentication/script.js' %}"></script>
 {% endblock %}

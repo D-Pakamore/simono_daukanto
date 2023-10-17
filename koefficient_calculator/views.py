@@ -6,12 +6,14 @@ from .models import ProfessionToExperience, ProfessionToQualification, Experienc
 from .serializers import ProfessionToExperienceSerializer, ProfessionToQualificationSerializer, ExperienceSerializer, QualificationSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-class KoefficientListView(ListView):
+class KoefficientListView(LoginRequiredMixin, ListView):
     model = Koefficient
     template_name = 'koefficient-list.html'
+    login_url = '/accounts/login/'
 
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')

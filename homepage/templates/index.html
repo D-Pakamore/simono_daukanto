@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% block content %}
-    <h1 style="text-align: center; margin-top: 20px;">Sveiki atvykę</h1>
+  <h1 style="text-align: center; margin-top: 20px;">Sveiki atvykę {% if user %}{{ user.username|title }}{% endif %}</h1>
 {% endblock %}

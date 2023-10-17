@@ -5,11 +5,13 @@ from .models import Teacher
 from workload_calculator.models import Workload, ActivityToWorkload, ContactClasses
 from activities.models import Activity, YearlyHours
 from koefficient_calculator.models import Profession, Qualification, Experience, Koefficient
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
-class TeacherListView(ListView):
+class TeacherListView(LoginRequiredMixin, ListView):
     model = Teacher
     template_name = 'teacher-list.html'
+    login_url = '/accounts/login/'
 
     def get_queryset(self):
         # Fetch the employees and their related coefficients
