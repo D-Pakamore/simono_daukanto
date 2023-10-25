@@ -10,6 +10,8 @@ class Teacher(models.Model):
     home_address = models.CharField(max_length=255, blank=True)
     #auto calc
     koefficient = models.ForeignKey(Koefficient, null=True, blank=True, on_delete=models.SET_NULL)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.first_name + " " + self.last_name

@@ -23,7 +23,7 @@ MEDIA_ROOT = Path(BASE_DIR, 'media')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.neatsimenu.lt', '127.0.0.1', 'neatsimenu.lt']
+ALLOWED_HOSTS = ['www.neatsimenu.lt', '127.0.0.1', 'neatsimenu.lt', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://www.neatsimenu.lt', 'https://127.0.0.1']
 
 #authentication
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'activities',
     'employees',
     'authentication',
+    'student',
 ]
 
 MIDDLEWARE = [

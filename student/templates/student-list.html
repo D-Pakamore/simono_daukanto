@@ -1,0 +1,68 @@
+{% extends 'student-layout.html' %}
+{% load static %}
+
+{% block tools %}
+<a href="{% url 'student-create' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+title="Pridėti mokinį">
+<img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}"
+  alt="create" />
+</a>
+{% endblock %}
+
+{% block search %}
+<form class="d-flex" method="GET" action="{% url 'student-list' %}">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vardas</th>
+      <th scope="col">Pavardė</th>
+      <th scope="col">
+        <div class="dropdown">
+          <a style="text-decoration: none; color: white;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Klsė</a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {% for class in student_classes %}
+            <li>
+              <a class="dropdown-item" href="{% url 'student-list' %}?search={{ class.class_name }}">{{ class.class_name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in object_list %}
+    <tr>
+      <th scope="row">{{ student.id }}</th>
+      <td>
+        <a href="{% url 'student-detail' student.id %}">
+          {{ student.name }}
+        </a>
+      </td>
+
+
+
+      <td>{{ student.surename }}</td>
+      <td>{{ student.student_class }}</td>
+      <td>
+        <div style="display: flex; gap: 10px;">
+          <a href="{% url 'student-delete' student.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Trinti">
+            <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+          </a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

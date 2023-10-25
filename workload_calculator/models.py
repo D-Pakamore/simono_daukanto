@@ -10,10 +10,14 @@ class Workload(models.Model):
     contactless_hours = models.IntegerField(null=True)
     total_hours = models.IntegerField(null=True)
     etat_fraction = models.FloatField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
 class ActivityToWorkload(models.Model):
     workload = models.ForeignKey(Workload, null=True, on_delete=models.CASCADE)
     yearly_hours = models.ForeignKey(YearlyHours, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
 
 class ContactClasses(models.Model):
@@ -29,6 +33,8 @@ class ContactClasses(models.Model):
     grade_range = models.CharField(max_length=100, choices=CLASS_GRADES)
     student_count_range = models.CharField(max_length=100, choices=SUTEDENT_COUNTS)
     classes_count = models.IntegerField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
 
 

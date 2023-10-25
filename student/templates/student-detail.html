@@ -1,0 +1,54 @@
+{% extends 'student-layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  h3 {
+    text-align: center;
+    margin: 80px 0 15px 0;
+  }
+
+  .detail-wrapper {
+    display: flex;
+  }
+
+  .koefficient-detail {
+    max-width: 300px;
+  }
+
+  .accordion {
+    max-width: 80%;
+    margin: 0 auto 0 auto;
+  }
+
+  .workload-detail-list>li>div {
+    text-align: center;
+  }
+
+  .accordion-header-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .activity-detail-list {
+    width: 100%;
+    text-align: center;
+  }
+</style>
+
+<h1>{{ student.name }} {{ student.surename }}</h1>
+
+
+  <ol class="list-group list-group koefficient-detail">
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-column">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Klasė</div>
+        {{ student.student_class }}
+      </div>
+    </li>
+  </ol>
+{% endblock %}

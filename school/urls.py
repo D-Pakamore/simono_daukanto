@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('employees/', include('employees.urls')),
+    path('student/', include('student.urls')),
     path('koefficients/', include('koefficient_calculator.urls')),
     path('api/', include('koefficient_calculator.urls')),
     path('workload/', include('workload_calculator.urls')),

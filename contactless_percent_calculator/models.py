@@ -26,6 +26,8 @@ class ContactlessHourPercent(models.Model):
     work_experience_period = models.CharField(max_length=255, choices=WORK_EXPERIENCE_PERIODS)
     student_count = models.CharField(max_length=255, choices=BORAD_STUDENT_COUNTS)
     percent = models.FloatField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return str(self.percent)
