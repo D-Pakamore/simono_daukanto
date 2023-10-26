@@ -67,3 +67,9 @@ class StudentDetailView(DetailView):
     model = Student
     template_name = 'student-detail.html'
     context_object_name = 'student'
+
+class StudentEditView(UpdateView):
+    model = Student
+    fields = '__all__'
+    template_name = 'student-edit.html'  # Create an HTML template for editing an employee
+    success_url = '/student/'    

@@ -33,7 +33,7 @@ title="Pridėti mokytoja">
   <tbody>
     {% for teacher in object_list %}
     <tr>
-      <th scope="row">{{ teacher.id }}</th>
+      <th scope="row">{{ forloop.counter }}</th>
       <td>
         <a href="{% url 'teacher-detail' teacher.id %}">
           {{ teacher.first_name }}
@@ -53,9 +53,8 @@ title="Pridėti mokytoja">
             title="Trinti">
             <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
           </a>
-          <a href="{% url 'workload-create' teacher_id=teacher.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="pridėti darbo krūvį">
-            <img style="width: 25px;" src="{% static 'images/document-add.svg' %}" alt="workload" />
+          <a href="{% url 'teacher-update' teacher.id %}">
+            <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
           </a>
         </div>
       </td>

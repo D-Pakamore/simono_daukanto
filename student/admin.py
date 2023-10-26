@@ -13,5 +13,5 @@ class StudentClassAdmin(admin.ModelAdmin):
 
 @admin.register(StudentClassToTeacher)
 class StudentClassToTeacherAdmin(admin.ModelAdmin):
-    list_display = ['teacher', 'student']
+    list_display = ['teacher', 'student_class']
     exclude = []

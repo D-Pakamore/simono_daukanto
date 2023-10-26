@@ -7,6 +7,7 @@ from activities.models import Activity, YearlyHours
 from koefficient_calculator.models import Profession, Qualification, Experience, Koefficient
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from student.models import StudentClassToTeacher, Student, StudentClass
 
 class TeacherListView(LoginRequiredMixin, ListView):
     model = Teacher
@@ -87,31 +88,18 @@ class TeacherDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        classes_to_teacher = StudentClassToTeacher.objects.filter(teacher=self.object.id)
+        classes = [i.student_class for i in classes_to_teacher]
+        
+        for student_class in classes:
+            student_class.students = Student.objects.filter(student_class=student_class)
 
-        #Workload to context
-        teacher_id = self.kwargs.get('pk')
-        teacher_instance = Teacher.objects.get(id=teacher_id)
-        workloads = Workload.objects.filter(teacher=teacher_instance)
-
-        for workload in workloads:
-            activities_to_workload = ActivityToWorkload.objects.filter(workload=workload)
-
-            yearly_hours = [YearlyHours.objects.get(id=i.yearly_hours.id) for i in activities_to_workload]
-
-            activity_ids = list(dict.fromkeys([i.activity.id for i in yearly_hours]))
-            activities = [Activity.objects.get(id=i) for i in activity_ids]
-
-            for activity in activities:
-                for yearly_hour in yearly_hours:
-                    if yearly_hour.activity.id == activity.id:
-                        activity.yearly_hours = yearly_hour.hours
-
-
-            workload.contact_classes = ContactClasses.objects.filter(workload=workload.id)
-            workload.activities = activities
-                
-
-
-        context['workloads'] = workloads
+        context['classes_students'] = classes
 
         return context  
+
+class TeacherUpdateView(UpdateView):
+    model = Teacher
+    template_name = 'teacher-update.html'
+    fields = ['first_name', 'last_name', 'birth_date', 'phone_number', 'email', 'home_address']
+    success_url = '/employees/'    

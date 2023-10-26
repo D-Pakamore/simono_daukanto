@@ -40,7 +40,7 @@
     <tbody>
       {% for student in object_list %}
         <tr>
-          <th scope="row">{{ student.id }}</th>
+          <th scope="row">{{ forloop.counter }}</th>
           <td>
             <a href="{% url 'student-detail' student.id %}">{{ student.name }}</a>
           </td>
@@ -49,6 +49,9 @@
           <td>{{ student.student_class }}</td>
           <td>
             <div style="display: flex; gap: 10px;">
+              <a href="{% url 'student-update' student.id %}">
+                <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
+              </a>
               <a href="{% url 'student-delete' student.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Trinti"><img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" /></a>
             </div>
           </td>

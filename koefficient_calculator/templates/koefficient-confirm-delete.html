@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h2 style="text-align: center; margin-top: 100px;">Patvirtinkite Veiksmą</h2>
+  <p style="text-align: center;">Ar tikrai norite ištrinti koefcicientą?</p>
+
+  <form style="text-align: center;" method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Taip">
+    <a class="btn btn-secondary" href="{% url 'student-list' %}">Atšaukti</a>
+  </form>
+{% endblock %}

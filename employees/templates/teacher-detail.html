@@ -20,8 +20,12 @@
   }
 
   .accordion {
-    max-width: 80%;
-    margin: 0 auto 0 auto;
+   max-width: 500px;
+   margin: 0 auto 0 auto;
+   /* position: absolute;
+   right: 0;
+   top: 0; */
+    
   }
 
   .workload-detail-list>li>div {
@@ -42,134 +46,64 @@
 
 <h1>{{ teacher.first_name }} {{ teacher.last_name }}</h1>
 
-
-  <ol class="list-group list-group koefficient-detail">
-    <li class="list-group-item d-flex justify-content-between align-items-start flex-column">
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Profesija</div>
-        {{ teacher.koefficient.profession }}
-      </div>
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Patirtis</div>
-        {{ teacher.koefficient.experience }} metų
-      </div>
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Kvalifikacija</div>
-        {{ teacher.koefficient.qualification }}
-      </div>
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Koeficientas</div>
-        {{ teacher.koefficient }}
-      </div>
-    </li>
-  </ol>
-
+<ol class="list-group list-group koefficient-detail">
+  <li class="list-group-item d-flex justify-content-between align-items-start flex-column">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Gimimo metai</div>
+      {{ teacher.birth_date }}
+    </div>
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Telefonas</div>
+      {{ teacher.phone_number }}
+    </div>
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Paštas</div>
+      {{ teacher.email }}
+    </div>
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Adresas</div>
+      {{ teacher.home_address }}
+    </div>
+  </li>
+</ol>
 
 
 
-  <div class="accordion" id="accordionExample">
-    <h3>Darbo Krūviai</h3>
-    {% for workload in workloads %}
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapse{{ workload.id }}" aria-expanded="true" aria-controls="collapse{{ workload.id }}">
-          <div class="accordion-header-wrapper">
-            <div>
-              <strong>Dėstomas dalykas:&nbsp;</strong> {{ workload.contactless_hour_percent.teaching_subject}}
-            </div>
-            <div>
-              <strong>&nbsp;Patirtis:&nbsp;</strong> {{workload.contactless_hour_percent.work_experience_period}}
-            </div>
-            <div>
-              <strong>&nbsp;Studentų skaičius:&nbsp;</strong> {{workload.contactless_hour_percent.student_count}}
-            </div>
-          </div>
-        </button>
-      </h2>
-      <div id="collapse{{ workload.id }}" class="accordion-collapse collapse show"
-        aria-labelledby="heading{{ workload.id }}" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <ol class="list-group list-group workload-detail-list">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Metinės kontaktinės valandos</div>
-                {{workload.contact_hours}}
-              </div>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Procentas</div>
-                {{workload.contactless_hour_percent}}
-              </div>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Valandos</div>
-                {{workload.contactless_hours}}
-              </div>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Iš viso valandų</div>
-                {{workload.total_hours}}
-              </div>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Etato dalis</div>
-                {{workload.etat_fraction}}
-              </div>
-            </li>
-          </ol>
 
-          <div class="d-flex">
-            <ol class="list-group list-group activity-detail-list">
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold d-flex flex-column">Veikla</div>
-                  {% for activity in workload.activities %}
-                  <div>
-                    {{activity.name}}
-                  </div>
-                  {% endfor %}
-                </div>
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold d-flex flex-column">Valandos</div>
-                  {% for activity in workload.activities %}
-                  <div>
-                    {{activity.yearly_hours}}
-                  </div>
-                  {% endfor %}
-                </div>
-              </li>
-            </ol>
-
-            <ol class="list-group list-group activity-detail-list">
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold d-flex flex-column">Klasė</div>
-                  {% for contact_class in workload.contact_classes %}
-                  <div>
-                    {{contact_class.grade_range}}
-                  </div>
-                  {% endfor %}
-                </div>
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold d-flex flex-column">Studentu skaičius</div>
-                  {% for contact_class in workload.contact_classes %}
-                  <div>
-                    {{contact_class.student_count_range}}
-                  </div>
-                  {% endfor %}
-                </div>
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold d-flex flex-column">klasių kiekis</div>
-                  {% for contact_class in workload.contact_classes %}
-                  <div>
-                    {{contact_class.classes_count}}
-                  </div>
-                  {% endfor %}
-                </div>
-              </li>
-            </ol>
+<div class="accordion" id="accordionExample">
+  <h3>Klasės</h3>
+  {% for class_students in classes_students %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapse{{ class_students.id }}" aria-expanded="true"
+        aria-controls="collapse{{ class_students.id }}">
+        <div class="accordion-header-wrapper">
+          <div>
+            {{class_students.class_name}}
           </div>
         </div>
+      </button>
+    </h2>
+    <div id="collapse{{ class_students.id }}" class="accordion-collapse collapse show"
+      aria-labelledby="heading{{ class_students.id }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <table class="table table-hover">
+          <tbody>
+            {% for student in class_students.students %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ student.name }}</td>
+              <td>{{ student.surename }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
+</div>
+
 
 {% endblock %}

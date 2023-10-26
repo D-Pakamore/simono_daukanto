@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProfessionToExperienceViewSet, ProfessionToQualificationViewSet, KoefficientListView, KoefficientEditView, KoefficientCreateView
+from .views import ProfessionToExperienceViewSet, ProfessionToQualificationViewSet, KoefficientListView, KoefficientEditView, KoefficientCreateView, KoefficientDeleteView
 
 router = DefaultRouter()
 router.register(r'profession-to-experience', ProfessionToExperienceViewSet)
@@ -12,4 +12,5 @@ urlpatterns = [
     path('koefficients/', KoefficientListView.as_view(), name='koefficient-list'),
     path('koefficients/<int:pk>/edit/', KoefficientEditView.as_view(), name='koefficient-edit'),
     path('koefficients/create/', KoefficientCreateView.as_view(), name='koefficient-create'),
+    path('koefficient/<int:pk>/delete/', KoefficientDeleteView.as_view(), name='koefficient-delete'),
 ]

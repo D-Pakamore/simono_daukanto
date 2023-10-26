@@ -53,7 +53,12 @@ class KoefficientCreateView(CreateView):
     model = Koefficient
     template_name = 'koefficient-create.html'
     form_class = KoefficientCreateForm
-    success_url = '/employees/'
+    success_url = '/api/koefficients/'
+
+class KoefficientDeleteView(DeleteView):
+    model = Koefficient
+    template_name = 'koefficient-confirm-delete.html'
+    success_url = '/api/koefficients/'
 
 #api
 class ExperienceViewSet(viewsets.ModelViewSet):

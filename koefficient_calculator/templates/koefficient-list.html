@@ -30,7 +30,7 @@ title="Pridėti koeficientą">
     <tbody>
       {% for koefficient in object_list %}
         <tr>
-          <th scope="row">{{ koefficient.id }}</th>
+          <th scope="row">{{ forloop.counter }}</th>
           <td>{{ koefficient.profession }}</td>
           <td>{{ koefficient.qualification }}</td>
           <td>{{ koefficient.experience }}</td>
@@ -40,6 +40,7 @@ title="Pridėti koeficientą">
               <a href="{% url 'koefficient-edit' koefficient.id %}">
                 <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
               </a>
+              <a href="{% url 'koefficient-delete' koefficient.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Trinti"><img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" /></a>
             </div>
           </td>
         </tr>
