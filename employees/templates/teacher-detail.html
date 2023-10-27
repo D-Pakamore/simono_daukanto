@@ -8,7 +8,6 @@
 
   h3 {
     text-align: center;
-    margin: 80px 0 15px 0;
   }
 
   .detail-wrapper {
@@ -70,8 +69,20 @@
 
 
 
-<div class="accordion" id="accordionExample">
+<div style="border: 1px solid rgba(0,0,0,.125); border-radius: 5px;" class="accordion" id="accordionExample">
   <h3>Klasės</h3>
+  <div class="dropdown">
+    <a style="text-decoration: none; color: white;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" title="Pridėti klase" aria-expanded="false">
+      <img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" />
+    </a>
+    <ul style="max-height: 300px; overflow-y: scroll;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for class in all_classes %}
+        <li>
+          <a class="dropdown-item" href="{% url 'add-class-to-teacher' class_id=class.id teacher_id=teacher.id %}">{{ class.class_name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
   {% for class_students in classes_students %}
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
@@ -90,6 +101,18 @@
       <div class="accordion-body">
         <table class="table table-hover">
           <tbody>
+      
+            <thead style="border: none;">
+              <tr>
+              <th style="padding-left: 2px;">
+                <a href="{% url 'remove-class-from-teacher' class_id=class_students.id teacher_id=teacher.id %}">
+                  <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+                </a>
+              </th>
+              <th>Vardas</th>
+              <th>Pavardė</th>
+            </tr>
+            </thead>
             {% for student in class_students.students %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>

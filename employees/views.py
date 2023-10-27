@@ -90,11 +90,13 @@ class TeacherDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         classes_to_teacher = StudentClassToTeacher.objects.filter(teacher=self.object.id)
         classes = [i.student_class for i in classes_to_teacher]
+        all_classes = StudentClass.objects.all()
         
         for student_class in classes:
             student_class.students = Student.objects.filter(student_class=student_class)
 
         context['classes_students'] = classes
+        context['all_classes'] = all_classes
 
         return context  
 
@@ -102,4 +104,27 @@ class TeacherUpdateView(UpdateView):
     model = Teacher
     template_name = 'teacher-update.html'
     fields = ['first_name', 'last_name', 'birth_date', 'phone_number', 'email', 'home_address']
-    success_url = '/employees/'    
+    success_url = '/employees/'
+
+def add_class_to_teacher(request, class_id, teacher_id):
+    class_instance = StudentClass.objects.get(id=class_id)
+    teacher_instance = Teacher.objects.get(id=teacher_id)
+
+    new_instance = StudentClassToTeacher(teacher=teacher_instance, student_class=class_instance)
+    new_instance.save()
+
+    teacher_detail_view = TeacherDetailView.as_view()
+    return teacher_detail_view(request, pk=teacher_id)  
+
+def remove_class_from_teacher(request, class_id, teacher_id):
+    class_instance = StudentClass.objects.get(id=class_id)
+    teacher_instance = Teacher.objects.get(id=teacher_id)
+
+    remove_instance = StudentClassToTeacher.objects.get(teacher=teacher_instance, student_class=class_instance)
+    remove_instance.delete()
+
+    teacher_detail_view = TeacherDetailView.as_view()
+    return teacher_detail_view(request, pk=teacher_id)  
+
+
+
