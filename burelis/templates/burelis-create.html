@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+  </style>
+  <h2 style="text-align: center; margin-top: 25px;">Kurti būreli</h2>
+
+  <form style="max-width: 400px; margin: 25px auto 0 auto;" class="form-group" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="width: 100%; text-align: center;">
+      <button class="btn btn-primary" type="submit">Save</button>
+      <a class="btn btn-secondary" href="{% url 'burelis-list' %}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

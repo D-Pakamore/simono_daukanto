@@ -50,7 +50,28 @@ class TeacherCreateForm(ModelForm):
             'phone_number': 'Telefonas', 
             'email': 'Paštas',
             'home_address': 'Asresas',
-        }      
+        }
+
+class TeacherEditForm(ModelForm):
+    # profession = ModelChoiceField(queryset=Profession.objects.all(), label="Profesija")
+    # experience = ModelChoiceField(queryset=Experience.objects.all(), label="Patirtis metais")
+    # qualification = ModelChoiceField(queryset=Qualification.objects.all(), label="Kvalifikacija")
+
+    # def __init__(self, *args, **kwargs):
+    #     kwargs.setdefault('label_suffix', '')  
+    #     super(TeacherCreateForm, self).__init__(*args, **kwargs)
+    
+    class Meta:
+        model = Teacher
+        fields = ['first_name', 'last_name','birth_date', 'phone_number', 'email', 'home_address']
+        labels = {
+            'first_name': 'Vardas',
+            'last_name': 'Pavardė',
+            'birth_date': 'Gimimo data',
+            'phone_number': 'Telefonas', 
+            'email': 'Paštas',
+            'home_address': 'Asresas',
+        }
         
     
 class TeacherCreateView(CreateView):
@@ -103,7 +124,7 @@ class TeacherDetailView(DetailView):
 class TeacherUpdateView(UpdateView):
     model = Teacher
     template_name = 'teacher-update.html'
-    fields = ['first_name', 'last_name', 'birth_date', 'phone_number', 'email', 'home_address']
+    form_class = TeacherEditForm
     success_url = '/employees/'
 
 def add_class_to_teacher(request, class_id, teacher_id):

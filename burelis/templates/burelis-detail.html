@@ -1,0 +1,125 @@
+{% extends 'employee-layout.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    h1 {
+      text-align: center;
+    }
+    
+    h3 {
+      text-align: center;
+    }
+    
+    .detail-wrapper {
+      display: flex;
+    }
+    
+    .koefficient-detail {
+      max-width: 300px;
+    }
+    
+    .accordion {
+      max-width: 500px;
+      margin: 0 auto 0 auto;
+      /* position: absolute;
+       right: 0;
+       top: 0; */
+    }
+    
+    .workload-detail-list > li > div {
+      text-align: center;
+    }
+    
+    .accordion-header-wrapper {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .activity-detail-list {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .accordion-header-wrapper {
+      display: flex;
+    }
+  </style>
+
+  <h1>{{ burelis.pavadinimas }}</h1>
+  
+  
+  
+  
+  
+  <ol class="list-group list-group koefficient-detail">
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-column">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Valandų skaičius</div>
+        {{ burelis.valandu_skaicius }}
+      </div>
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Mokytojas</div>
+        {{ burelis.mokytojas }}
+      </div>
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Diena</div>
+        {{ burelis.diena }}
+      </div>
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Valandos</div>
+        {{ burelis.valanda_nuo_iki }}
+      </div>
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">Vygdimo vieta</div>
+        {{ burelis.vygdimo_vieta }}
+      </div>
+    </li>
+  </ol>
+
+  <div style="width: 60%; margin: 50px auto 0 auto;"> 
+    <div style="display: flex; justify-content: space-between;">
+      <div></div>
+      <h2>Vaikai</h2>
+      <div class="dropdown">
+        <a style="text-decoration: none; color: white;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" title="Pridėti klase" aria-expanded="false"><img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}" alt="create" /></a>
+        <ul style="max-height: 300px; overflow-y: scroll; text-align: center;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <input type="text" />
+          {% for student in students %}
+            <li>
+              <a class="dropdown-item" href="{% url 'add-student-to-burelis' student_id=student.id burelis_id=burelis.id %}">{{ student.name }} {{ student.surename }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Vardas</th>
+        <th scope="col">Pavardė</th>
+        <th scope="col">Klasė</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in burelis_students %}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ student.name }}</td>
+        <td>{{ student.surename }}</td>
+        <td>{{ student.student_class }}</td>
+        <td>
+          <a href="{% url 'remove-student-from-burelis' student_id=student.id burelis_id=burelis.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
+          title="Trinti">
+            <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script src="{% static 'burelis/script.js' %}"></script>
+{% endblock %}

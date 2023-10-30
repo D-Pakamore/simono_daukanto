@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'employees',
     'authentication',
     'student',
+    'burelis',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,65 @@
+{% extends 'employee-layout.html' %}
+{% load static %}
+
+{% block tools %}
+<a href="{% url 'burelis-create' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+title="Pridėti mokytoja">
+<img style="width: 25px; transform: rotate(45deg);" src="{% static 'images/cross-red.svg' %}"
+  alt="create" />
+</a>
+{% endblock %}
+
+{% block search %}
+<form class="d-flex" method="GET" action="{% url 'burelis-list' %}">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Pavadinimas</th>
+      <th scope="col">Valandu skaicius</th>
+      <th scope="col">Mokytojas</th>
+      <th scope="col">Diena</th>
+      <th scope="col">valanda nuo iki</th>
+      <th scope="col">Vygdimo vieta</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+        <a href="{% url 'burelis-detail' object.id %}">
+          {{ object.pavadinimas }}
+        </a>
+      </td>
+
+
+
+      <td>{{ object.valandu_skaicius }}</td>
+      <td>{{ object.mokytojas }}</td>
+      <td>{{ object.diena }}</td>
+      <td>{{ object.valanda_nuo_iki }}</td>
+      <td>{{ object.vygdimo_vieta }}</td>
+      <td>
+        <div style="display: flex; gap: 10px;">
+          <a href="{% url 'burelis-delete' object.id %}" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Trinti">
+            <img style="width: 25px;" src="{% static 'images/trash.svg' %}" alt="delete" />
+          </a>
+          <a href="{% url 'burelis-update' object.id %}">
+            <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
+          </a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

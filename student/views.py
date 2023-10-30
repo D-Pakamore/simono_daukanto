@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
-from django.forms import ModelForm, ModelChoiceField
+from django.forms import ModelForm, ModelChoiceField, CharField
 from .models import Student, StudentClass, StudentClassToTeacher
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -68,8 +68,19 @@ class StudentDetailView(DetailView):
     template_name = 'student-detail.html'
     context_object_name = 'student'
 
+class StudentEditForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ['name', 'surename', 'student_class']
+
+        labels = {
+            'name': 'Vardas',
+            'surename': 'Pavardė',
+            'student_class': 'Klasė',
+        }      
+
 class StudentEditView(UpdateView):
     model = Student
-    fields = '__all__'
+    form_class = StudentEditForm
     template_name = 'student-edit.html'  # Create an HTML template for editing an employee
     success_url = '/student/'    
