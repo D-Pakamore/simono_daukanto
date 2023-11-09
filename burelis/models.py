@@ -4,7 +4,7 @@ from student.models import Student
 
 class Burelis(models.Model):
     pavadinimas = models.CharField(max_length=255)
-    valandu_skaicius = models.IntegerField(max_length=255)
+    valandu_skaicius = models.IntegerField()
     mokytojas = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True, blank=True)
     diena = models.CharField(max_length=255)
     valanda_nuo_iki = models.CharField(max_length=255)

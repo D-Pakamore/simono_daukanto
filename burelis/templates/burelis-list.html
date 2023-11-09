@@ -56,6 +56,9 @@ title="Pridėti mokytoja">
           <a href="{% url 'burelis-update' object.id %}">
             <img style="width: 25px;" src="{% static 'images/pencil.svg' %}" alt="Edit" />
           </a>
+          <a href="{% url 'burelis-csv' object.id %}">
+            <img style="width: 25px;" src="{% static 'images/printer.svg' %}" alt="Print" />
+          </a>
         </div>
       </td>
     </tr>
