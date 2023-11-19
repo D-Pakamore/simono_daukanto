@@ -14,9 +14,9 @@ def calc_contact_hours(contact_classes: ContactClasses):
     contact_hours = 0
 
     for class_instance in contact_classes:
-        if class_instance.grade_range == '1-4':
+        if class_instance.grade_range <= 4:
             multiplier = 35
-        elif class_instance.grade_range == '5-8':
+        else:
             multiplier = 37
 
         contact_hours += multiplier * class_instance.classes_count

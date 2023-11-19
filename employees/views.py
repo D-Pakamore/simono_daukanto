@@ -110,16 +110,24 @@ class TeacherDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         classes_to_teacher = StudentClassToTeacher.objects.filter(teacher=self.object.id)
+        workloads = Workload.objects.filter(teacher=self.object)
         classes = [i.student_class for i in classes_to_teacher]
         all_classes = StudentClass.objects.all()
         
         for student_class in classes:
             student_class.students = Student.objects.filter(student_class=student_class)
 
+        for workload in workloads:
+            workload.classes = ContactClasses.objects.filter(workload=workload)
+            workload.activities_to_workloads = ActivityToWorkload.objects.filter(workload=workload)
+            # for activity_to_workload in activities_to_workloads:
+            #     yearly_hours = YearlyHours.objects.filter(id=activity_to_workload.yearly_hours.id)
+
         context['classes_students'] = classes
         context['all_classes'] = all_classes
+        context['workloads'] = workloads
 
-        return context  
+        return context
 
 class TeacherUpdateView(UpdateView):
     model = Teacher
